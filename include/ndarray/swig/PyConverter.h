@@ -163,6 +163,11 @@ struct PyConverter : public detail::PyConverterBase<T> {
 
 };
 
+template <typename T>
+PyObject * toPyObject(T const & m) {
+    return ndarray::PyConverter<T>::toPython(m);
+}
+
 /// \cond SPECIALIZATIONS
 
 template <>
