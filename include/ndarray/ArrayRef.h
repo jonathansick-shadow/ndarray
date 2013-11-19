@@ -123,7 +123,12 @@ public:
     ArrayRef const &
 #endif
     operator =(Scalar const & scalar) const {
-        std::fill(this->begin(),this->end(),scalar);
+        // Would use "std::fill(this->begin(),this->end(),scalar)" here,
+        // except it doesn't work on Mac 10.9 (#3054).
+        Iterator const end = this->end();
+        for (Iterator i = this->begin(); i != end; ++i) {
+            *i = scalar;
+        }
         return *this;
     }
 
