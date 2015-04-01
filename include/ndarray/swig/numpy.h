@@ -133,7 +133,7 @@ struct PyConverter< Array<T,N,C> > : public detail::PyConverterBase< Array<T,N,C
         }
         int actualType = PyArray_TYPE(p.get());
         int requiredType = detail::NumpyTraits<NonConst>::getCode();
-        if (actualType != requiredType) {
+        if (!PyArray_EquivTypenums(actualType, requiredType)) {
             PyErr_SetString(PyExc_ValueError, "numpy.ndarray argument has incorrect data type");
             return false;
         }
