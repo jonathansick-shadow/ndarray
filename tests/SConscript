@@ -1,5 +1,5 @@
 # -*- python -*-
-from lsst.sconsUtils import scripts, env
+from lsst.sconsUtils import scripts, env, targets
 
 ccList = ["ndarray.cc", "ndarray-eigen.cc"]
 if env.dependencies.get("fftw"):
@@ -16,3 +16,4 @@ tests = scripts.BasicSConscript.tests(
 )
 
 env.Depends(tests, mod)
+env.Depends(tests, targets["include"])
